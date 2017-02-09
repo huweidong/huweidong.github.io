@@ -1,3 +1,6 @@
+---
+title: AFNetworking流程总结
+---
 # AFNetworking流程总结
 
 ### 一.调用POST或GET方法,并把成功、失败方法块传入.
