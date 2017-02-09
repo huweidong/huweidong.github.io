@@ -1,6 +1,9 @@
 ## AFNetworking流程总结
-### 一.调用POST或GET方法,并把成功、失败方法块传入.
-### 二.调用dataTaskWithHTTPMethod方法返回NSURLSessionDataTask对象dataTask(下面是生成NSURLSessionDataTask对象的时候里面做的事情)
+
+### 调用POST或GET方法,并把成功、失败方法块传入.
+
+### 调用dataTaskWithHTTPMethod方法返回NSURLSessionDataTask对象dataTask(下面是生成NSURLSessionDataTask对象的时候里面做的事情)
+
 	(1).根据POST或GET方法、URL、参数生成NSMutableURLRequest对象request
 		1.判断参数有效与否
 		2.根据URL和HTTPMethod方法类型初始化NSMutableURLRequest对象
