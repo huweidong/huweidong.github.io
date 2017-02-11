@@ -91,11 +91,11 @@
 字典深浅拷贝1234NSMutableDictionary *myDic=[@&amp;#123;@&amp;quot;22">
 <meta property="og:type" content="article">
 <meta property="og:title" content="tips笔记总结">
-<meta property="og:url" content="http://yoursite.com/2017/02/10/总结/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/01/10/总结/index.html">
 <meta property="og:site_name" content="echo.hu">
 <meta property="og:description" content="tableViewCell里面图片圆角离屏渲染解决方案撰写一个UIImageView的分类,分类仿写SDWebImage里面加载图片的方法把图片加载下来后,通过另外一个UIImage分类用贝塞尔曲线切圆角处理,然后根据和SDWebImage的逻辑一样保留圆角图片缓存,清除原有非圆角图片缓存
 字典深浅拷贝1234NSMutableDictionary *myDic=[@&amp;#123;@&amp;quot;22">
-<meta property="og:updated_time" content="2017-02-11T09:08:18.000Z">
+<meta property="og:updated_time" content="2017-02-11T15:06:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tips笔记总结">
 <meta name="twitter:description" content="tableViewCell里面图片圆角离屏渲染解决方案撰写一个UIImageView的分类,分类仿写SDWebImage里面加载图片的方法把图片加载下来后,通过另外一个UIImage分类用贝塞尔曲线切圆角处理,然后根据和SDWebImage的逻辑一样保留圆角图片缓存,清除原有非圆角图片缓存
@@ -127,7 +127,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/02/10/总结/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/01/10/总结/"/>
 
 
 
@@ -250,7 +250,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/10/总结/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/10/总结/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="echo.hu">
@@ -289,8 +289,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-10T12:56:22+08:00">
-                2017-02-10
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-10T12:56:22+08:00">
+                2017-01-10
               </time>
             
 
@@ -332,10 +332,6 @@
 <p>如上面代码所示使用可变对象时会出现里面有相同元素的情况,而当重新将其浅拷贝的时候则里面内容会转回不可变对象,所以才会恢复正常.</p>
 <h3 id="打印输出黑科技"><a href="#打印输出黑科技" class="headerlink" title="打印输出黑科技"></a>打印输出黑科技</h3><p>重写实体类如下方法然后就可以直接通过NSLog(@”cls=%@”,cls)输出定制的内容</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">- (NSString *)description &#123;</div><div class="line">    return [NSString stringWithFormat:@&quot;&lt;%@: %p, %@&quot;, [self class],self,@&#123;@&quot;youName&quot;:_youName,                                                                                             @&quot;myName&quot;:_myName&#125;];</div><div class="line">&#125;</div><div class="line">//debug环境下</div><div class="line">- (NSString *)debugDescription &#123;</div><div class="line">//    return [NSString stringWithFormat:@&quot;&lt;%@: %p, %@&quot;, [self class],self,@&#123;@&quot;youName&quot;:_youName,</div><div class="line">//                                                                          @&quot;myName&quot;:_myName&#125;];</div><div class="line">    return [self description];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="替换两个方法的实现"><a href="#替换两个方法的实现" class="headerlink" title="替换两个方法的实现"></a>替换两个方法的实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Method originalMethod=class_getInstanceMethod([NSString class], @selector(lowercaseString));</div><div class="line">Method swappedMethod=class_getInstanceMethod([NSString class], @selector(eoc_myLowercaseString));</div><div class="line">method_exchangeImplementations(originalMethod, swappedMethod);</div></pre></td></tr></table></figure>
-<p>替换两个方法的实现达到输出测试结果的目的(作用范围,整个运行期),或者如AFNetworking中的替换掉NSUrlSession中的resume和suspend方法为自身逻辑服务.</p>
-<h3 id="关联对象方法的使用"><a href="#关联对象方法的使用" class="headerlink" title="关联对象方法的使用"></a>关联对象方法的使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">-(void)loadAlertView&#123;</div><div class="line">    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@&quot;Question&quot; message:@&quot;2333&quot; delegate:self cancelButtonTitle:@&quot;Cancel&quot; otherButtonTitles:@&quot;Submit&quot;, nil];</div><div class="line">    void (^block)(NSInteger) = ^(NSInteger btnIndex)&#123;</div><div class="line">        if (btnIndex==0) &#123;</div><div class="line">            NSLog(@&quot;0000&quot;);</div><div class="line">        &#125;else&#123;</div><div class="line">            NSLog(@&quot;other&quot;);</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">    objc_setAssociatedObject(alert, EOCMYAlertViewKey, block, OBJC_ASSOCIATION_COPY);</div><div class="line">    [alert show];</div><div class="line">&#125;</div><div class="line"></div><div class="line">#pragma mark - UIAlertViewDelegate</div><div class="line">- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex NS_DEPRECATED_IOS(2_0, 9_0)&#123;</div><div class="line">    void (^block)(NSInteger)=objc_getAssociatedObject(alertView, EOCMYAlertViewKey);</div><div class="line">    block(buttonIndex);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>使用关联对象方法可以把逻辑集中写在定义控件的地方使得逻辑不会过于分散.</p>
 <h3 id="基于运行期OC的Get方法和Set方法的实现"><a href="#基于运行期OC的Get方法和Set方法的实现" class="headerlink" title="基于运行期OC的Get方法和Set方法的实现"></a>基于运行期OC的Get方法和Set方法的实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">//动态方法解析函数</div><div class="line">+(BOOL)resolveInstanceMethod:(SEL)sel&#123;</div><div class="line">    NSString *selectorString=NSStringFromSelector(sel);</div><div class="line">    if ([selectorString hasPrefix:@&quot;set&quot;]) &#123;</div><div class="line">        class_addMethod(self, sel, (IMP)autoDictionarySetter, &quot;v@:@&quot;);</div><div class="line">    &#125;else&#123;</div><div class="line">        class_addMethod(self, sel, (IMP)autoDictionaryGetter, &quot;@@:&quot;);</div><div class="line">    &#125;</div><div class="line">    return YES;</div><div class="line">&#125;</div><div class="line"></div><div class="line">id autoDictionaryGetter(id self,SEL _cmd)&#123;</div><div class="line">    EOCAutoDictionary *typeSelf=(EOCAutoDictionary *)self;</div><div class="line">    NSMutableDictionary *backingStore=typeSelf.backingStore;</div><div class="line">    NSString *key=NSStringFromSelector(_cmd);</div><div class="line">    return [backingStore objectForKey:key];</div><div class="line">&#125;</div><div class="line"></div><div class="line">void autoDictionarySetter(id self,SEL _cmd,id value)&#123;</div><div class="line">    EOCAutoDictionary *typeSelf=(EOCAutoDictionary *)self;</div><div class="line">    NSMutableDictionary *backingStore=typeSelf.backingStore;</div><div class="line">    </div><div class="line">    NSString *selectorString=NSStringFromSelector(_cmd);</div><div class="line">    NSMutableString *key=[selectorString mutableCopy];</div><div class="line">    </div><div class="line">    [key deleteCharactersInRange:NSMakeRange(key.length - 1, 1)];</div><div class="line">    </div><div class="line">    [key deleteCharactersInRange:NSMakeRange(0, 3)];</div><div class="line">    </div><div class="line">    NSString *lowercaseFirstChar=[[key substringToIndex:1] lowercaseString];</div><div class="line">    [key replaceCharactersInRange:NSMakeRange(0, 1) withString:lowercaseFirstChar];</div><div class="line">    if (value) &#123;</div><div class="line">        [backingStore setObject:value forKey:key];</div><div class="line">    &#125;else&#123;</div><div class="line">        [backingStore removeObjectForKey:key];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>当对象在收到无法解读的消息后,首先调用其所属类的下列类方法</p>
 <p> +(BOOL)resolveInstanceMethod:(SEL)sel</p>
@@ -390,8 +386,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/09/多线程/" rel="next" title="多线程笔记">
-                <i class="fa fa-chevron-left"></i> 多线程笔记
+              <a href="/2016/11/08/AFNetworking流程总结/" rel="next" title="AFNetworking流程总结">
+                <i class="fa fa-chevron-left"></i> AFNetworking流程总结
               </a>
             
           </div>
@@ -399,6 +395,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/09/多线程/" rel="prev" title="多线程笔记">
+                多线程笔记 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -468,7 +468,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -507,7 +507,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#tableViewCell里面图片圆角离屏渲染解决方案"><span class="nav-number">1.</span> <span class="nav-text">tableViewCell里面图片圆角离屏渲染解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字典深浅拷贝"><span class="nav-number">2.</span> <span class="nav-text">字典深浅拷贝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NSMutableSet里面尽量少用不可变对象"><span class="nav-number">3.</span> <span class="nav-text">NSMutableSet里面尽量少用不可变对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打印输出黑科技"><span class="nav-number">4.</span> <span class="nav-text">打印输出黑科技</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#替换两个方法的实现"><span class="nav-number">5.</span> <span class="nav-text">替换两个方法的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关联对象方法的使用"><span class="nav-number">6.</span> <span class="nav-text">关联对象方法的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于运行期OC的Get方法和Set方法的实现"><span class="nav-number">7.</span> <span class="nav-text">基于运行期OC的Get方法和Set方法的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#valueForKeyPath使用总结"><span class="nav-number">8.</span> <span class="nav-text">valueForKeyPath使用总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KVO"><span class="nav-number">9.</span> <span class="nav-text">KVO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NSPredicate谓词筛选器"><span class="nav-number">10.</span> <span class="nav-text">NSPredicate谓词筛选器</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#tableViewCell里面图片圆角离屏渲染解决方案"><span class="nav-number">1.</span> <span class="nav-text">tableViewCell里面图片圆角离屏渲染解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字典深浅拷贝"><span class="nav-number">2.</span> <span class="nav-text">字典深浅拷贝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NSMutableSet里面尽量少用不可变对象"><span class="nav-number">3.</span> <span class="nav-text">NSMutableSet里面尽量少用不可变对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打印输出黑科技"><span class="nav-number">4.</span> <span class="nav-text">打印输出黑科技</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于运行期OC的Get方法和Set方法的实现"><span class="nav-number">5.</span> <span class="nav-text">基于运行期OC的Get方法和Set方法的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#valueForKeyPath使用总结"><span class="nav-number">6.</span> <span class="nav-text">valueForKeyPath使用总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KVO"><span class="nav-number">7.</span> <span class="nav-text">KVO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NSPredicate谓词筛选器"><span class="nav-number">8.</span> <span class="nav-text">NSPredicate谓词筛选器</span></a></li></ol></div>
             
 
           </div>
