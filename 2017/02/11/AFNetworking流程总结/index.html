@@ -1,0 +1,652 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="AFNetworking流程总结一.调用POST或GET方法,并把成功、失败方法块传入.二.调用dataTaskWithHTTPMethod方法返回NSURLSessionDataTask对象dataTask(下面是生成NSURLSessionDataTask对象的时候里面做的事情)(1).根据POST或GET方法、URL、参数生成NSMutableURLRequest对象request
+判断参数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AFNetworking流程总结">
+<meta property="og:url" content="http://yoursite.com/2017/02/11/AFNetworking流程总结/index.html">
+<meta property="og:site_name" content="echo.hu">
+<meta property="og:description" content="AFNetworking流程总结一.调用POST或GET方法,并把成功、失败方法块传入.二.调用dataTaskWithHTTPMethod方法返回NSURLSessionDataTask对象dataTask(下面是生成NSURLSessionDataTask对象的时候里面做的事情)(1).根据POST或GET方法、URL、参数生成NSMutableURLRequest对象request
+判断参数">
+<meta property="og:updated_time" content="2017-02-11T08:54:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AFNetworking流程总结">
+<meta name="twitter:description" content="AFNetworking流程总结一.调用POST或GET方法,并把成功、失败方法块传入.二.调用dataTaskWithHTTPMethod方法返回NSURLSessionDataTask对象dataTask(下面是生成NSURLSessionDataTask对象的时候里面做的事情)(1).根据POST或GET方法、URL、参数生成NSMutableURLRequest对象request
+判断参数">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/02/11/AFNetworking流程总结/"/>
+
+
+
+
+
+  <title> AFNetworking流程总结 | echo.hu </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">echo.hu</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://github.com/huweidong" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/11/AFNetworking流程总结/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="echo.hu">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="echo.hu">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="echo.hu" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                AFNetworking流程总结
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-11T16:54:22+08:00">
+                2017-02-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="AFNetworking流程总结"><a href="#AFNetworking流程总结" class="headerlink" title="AFNetworking流程总结"></a>AFNetworking流程总结</h1><h3 id="一-调用POST或GET方法-并把成功、失败方法块传入"><a href="#一-调用POST或GET方法-并把成功、失败方法块传入" class="headerlink" title="一.调用POST或GET方法,并把成功、失败方法块传入."></a>一.调用POST或GET方法,并把成功、失败方法块传入.</h3><h3 id="二-调用dataTaskWithHTTPMethod方法返回NSURLSessionDataTask对象dataTask-下面是生成NSURLSessionDataTask对象的时候里面做的事情"><a href="#二-调用dataTaskWithHTTPMethod方法返回NSURLSessionDataTask对象dataTask-下面是生成NSURLSessionDataTask对象的时候里面做的事情" class="headerlink" title="二.调用dataTaskWithHTTPMethod方法返回NSURLSessionDataTask对象dataTask(下面是生成NSURLSessionDataTask对象的时候里面做的事情)"></a>二.调用dataTaskWithHTTPMethod方法返回NSURLSessionDataTask对象dataTask(下面是生成NSURLSessionDataTask对象的时候里面做的事情)</h3><h4 id="1-根据POST或GET方法、URL、参数生成NSMutableURLRequest对象request"><a href="#1-根据POST或GET方法、URL、参数生成NSMutableURLRequest对象request" class="headerlink" title="(1).根据POST或GET方法、URL、参数生成NSMutableURLRequest对象request"></a>(1).根据POST或GET方法、URL、参数生成NSMutableURLRequest对象request</h4><ul>
+<li><p>判断参数有效与否</p>
+</li>
+<li><p>根据URL和HTTPMethod方法类型初始化NSMutableURLRequest对象</p>
+</li>
+<li><p>self.mutableObservedChangedKeyPaths里面的值会在初始化requestSerializer中相关的属性的时候通过kvo赋值或移除</p>
+</li>
+<li><p>根据初始化选择的可序列化的类型(json、html、xml)调用不同类的方法赋值给mutableRequest</p>
+</li>
+</ul>
+<h4 id="2-根据-1-中生成的request对象并传入上传进度、下载进度方法块生成NSURLSessionDataTask对象并传入回调方法块-回调方法块里面根据返回的参数选择调用成功或失败方法块"><a href="#2-根据-1-中生成的request对象并传入上传进度、下载进度方法块生成NSURLSessionDataTask对象并传入回调方法块-回调方法块里面根据返回的参数选择调用成功或失败方法块" class="headerlink" title="(2).根据(1)中生成的request对象并传入上传进度、下载进度方法块生成NSURLSessionDataTask对象并传入回调方法块(回调方法块里面根据返回的参数选择调用成功或失败方法块)"></a>(2).根据(1)中生成的request对象并传入上传进度、下载进度方法块生成NSURLSessionDataTask对象并传入回调方法块(回调方法块里面根据返回的参数选择调用成功或失败方法块)</h4><ul>
+<li><p>判断线程安全</p>
+</li>
+<li><p>根据NSURLSessionDataTask对象dataTask绑定方法块(成功回调方法块、下载上传进度方法块)和委托,并添加相关通知如暂停任务和继续任务通知、添加相关任务属性kov的检测如countOfBytesReceived，countOfBytesExpectedToReceive属性等</p>
+</li>
+</ul>
+<h3 id="三-调用dataTask对象的方法resume发送网络请求"><a href="#三-调用dataTask对象的方法resume发送网络请求" class="headerlink" title="三.调用dataTask对象的方法resume发送网络请求"></a>三.调用dataTask对象的方法resume发送网络请求</h3><h3 id="四-然后从网络请求委托回调返回数据转发给AFURLSessionManagerTaskDelegate委托中的对应的方法"><a href="#四-然后从网络请求委托回调返回数据转发给AFURLSessionManagerTaskDelegate委托中的对应的方法" class="headerlink" title="四.然后从网络请求委托回调返回数据转发给AFURLSessionManagerTaskDelegate委托中的对应的方法"></a>四.然后从网络请求委托回调返回数据转发给AFURLSessionManagerTaskDelegate委托中的对应的方法</h3><h3 id="五-解析数据，然后从AFURLSessionManagerTaskDelegate中取出completionHandler方法块回调-解析数据是在另外开一个进程里面解析的"><a href="#五-解析数据，然后从AFURLSessionManagerTaskDelegate中取出completionHandler方法块回调-解析数据是在另外开一个进程里面解析的" class="headerlink" title="五.解析数据，然后从AFURLSessionManagerTaskDelegate中取出completionHandler方法块回调(解析数据是在另外开一个进程里面解析的)"></a>五.解析数据，然后从AFURLSessionManagerTaskDelegate中取出completionHandler方法块回调(解析数据是在另外开一个进程里面解析的)</h3>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/11/多线程/" rel="next" title="多线程笔记">
+                <i class="fa fa-chevron-left"></i> 多线程笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="echo.hu" />
+          <p class="site-author-name" itemprop="name">echo.hu</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AFNetworking流程总结"><span class="nav-number">1.</span> <span class="nav-text">AFNetworking流程总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-调用POST或GET方法-并把成功、失败方法块传入"><span class="nav-number">1.0.1.</span> <span class="nav-text">一.调用POST或GET方法,并把成功、失败方法块传入.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-调用dataTaskWithHTTPMethod方法返回NSURLSessionDataTask对象dataTask-下面是生成NSURLSessionDataTask对象的时候里面做的事情"><span class="nav-number">1.0.2.</span> <span class="nav-text">二.调用dataTaskWithHTTPMethod方法返回NSURLSessionDataTask对象dataTask(下面是生成NSURLSessionDataTask对象的时候里面做的事情)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-根据POST或GET方法、URL、参数生成NSMutableURLRequest对象request"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">(1).根据POST或GET方法、URL、参数生成NSMutableURLRequest对象request</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-根据-1-中生成的request对象并传入上传进度、下载进度方法块生成NSURLSessionDataTask对象并传入回调方法块-回调方法块里面根据返回的参数选择调用成功或失败方法块"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">(2).根据(1)中生成的request对象并传入上传进度、下载进度方法块生成NSURLSessionDataTask对象并传入回调方法块(回调方法块里面根据返回的参数选择调用成功或失败方法块)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-调用dataTask对象的方法resume发送网络请求"><span class="nav-number">1.0.3.</span> <span class="nav-text">三.调用dataTask对象的方法resume发送网络请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-然后从网络请求委托回调返回数据转发给AFURLSessionManagerTaskDelegate委托中的对应的方法"><span class="nav-number">1.0.4.</span> <span class="nav-text">四.然后从网络请求委托回调返回数据转发给AFURLSessionManagerTaskDelegate委托中的对应的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五-解析数据，然后从AFURLSessionManagerTaskDelegate中取出completionHandler方法块回调-解析数据是在另外开一个进程里面解析的"><span class="nav-number">1.0.5.</span> <span class="nav-text">五.解析数据，然后从AFURLSessionManagerTaskDelegate中取出completionHandler方法块回调(解析数据是在另外开一个进程里面解析的)</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">echo.hu</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

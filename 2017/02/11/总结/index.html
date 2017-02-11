@@ -1,0 +1,671 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="tableViewCell里面图片圆角离屏渲染解决方案撰写一个UIImageView的分类,分类仿写SDWebImage里面加载图片的方法把图片加载下来后,通过另外一个UIImage分类用贝塞尔曲线切圆角处理,然后根据和SDWebImage的逻辑一样保留圆角图片缓存,清除原有非圆角图片缓存
+字典深浅拷贝1234NSMutableDictionary *myDic=[@&amp;#123;@&amp;quot;22">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tips笔记总结">
+<meta property="og:url" content="http://yoursite.com/2017/02/11/总结/index.html">
+<meta property="og:site_name" content="echo.hu">
+<meta property="og:description" content="tableViewCell里面图片圆角离屏渲染解决方案撰写一个UIImageView的分类,分类仿写SDWebImage里面加载图片的方法把图片加载下来后,通过另外一个UIImage分类用贝塞尔曲线切圆角处理,然后根据和SDWebImage的逻辑一样保留圆角图片缓存,清除原有非圆角图片缓存
+字典深浅拷贝1234NSMutableDictionary *myDic=[@&amp;#123;@&amp;quot;22">
+<meta property="og:updated_time" content="2017-02-11T08:54:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="tips笔记总结">
+<meta name="twitter:description" content="tableViewCell里面图片圆角离屏渲染解决方案撰写一个UIImageView的分类,分类仿写SDWebImage里面加载图片的方法把图片加载下来后,通过另外一个UIImage分类用贝塞尔曲线切圆角处理,然后根据和SDWebImage的逻辑一样保留圆角图片缓存,清除原有非圆角图片缓存
+字典深浅拷贝1234NSMutableDictionary *myDic=[@&amp;#123;@&amp;quot;22">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/02/11/总结/"/>
+
+
+
+
+
+  <title> tips笔记总结 | echo.hu </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">echo.hu</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://github.com/huweidong" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/11/总结/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="echo.hu">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="echo.hu">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="echo.hu" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                tips笔记总结
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-11T16:54:22+08:00">
+                2017-02-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="tableViewCell里面图片圆角离屏渲染解决方案"><a href="#tableViewCell里面图片圆角离屏渲染解决方案" class="headerlink" title="tableViewCell里面图片圆角离屏渲染解决方案"></a>tableViewCell里面图片圆角离屏渲染解决方案</h3><p>撰写一个<a href="https://github.com/MyExam-hu/SummaryPro/blob/master/SummaryPro/Category/UIImageView%2BImageViewRadius.m" target="_blank" rel="external">UIImageView的分类</a>,分类仿写SDWebImage里面加载图片的方法把图片加载下来后,通过<a href="https://github.com/MyExam-hu/SummaryPro/blob/master/SummaryPro/Category/UIImage%2BImageRadius.m" target="_blank" rel="external">另外一个UIImage分类</a>用贝塞尔曲线切圆角处理,然后根据和SDWebImage的逻辑一样保留圆角图片缓存,清除原有非圆角图片缓存</p>
+<h3 id="字典深浅拷贝"><a href="#字典深浅拷贝" class="headerlink" title="字典深浅拷贝"></a>字典深浅拷贝</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">NSMutableDictionary *myDic=[@&#123;@&quot;22&quot;:@&quot;33&quot;&#125; mutableCopy];</div><div class="line">NSMutableDictionary *otherDic=myDic;</div><div class="line">//NSMutableDictionary *otherDic=[myDic mutableCopy];</div><div class="line">[otherDic setValue:@&quot;33&quot; forKey:@&quot;44&quot;];</div></pre></td></tr></table></figure>
+<p>改变可变字典otherDic时myDic也会同时改变,所以使用可变字典时要让两个字典独立需要注意使用mutableCopy.</p>
+<h3 id="NSMutableSet里面尽量少用不可变对象"><a href="#NSMutableSet里面尽量少用不可变对象" class="headerlink" title="NSMutableSet里面尽量少用不可变对象"></a>NSMutableSet里面尽量少用不可变对象</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">NSMutableSet *set=[NSMutableSet new];</div><div class="line">NSMutableArray *arrayA=[@[@1,@2] mutableCopy];</div><div class="line">[set addObject:arrayA];</div><div class="line">NSLog(@&quot;set=%@&quot;,set);</div><div class="line">    </div><div class="line">NSMutableArray *arrayB=[@[@1,@2] mutableCopy];</div><div class="line">[set addObject:arrayB];</div><div class="line">NSLog(@&quot;set=%@&quot;,set);</div><div class="line">    </div><div class="line">NSMutableArray *arrayC=[@[@1] mutableCopy];</div><div class="line">//[set addObject:[arrayC copy]];</div><div class="line">[set addObject:arrayC];</div><div class="line">NSLog(@&quot;set=%@&quot;,set);</div><div class="line">    </div><div class="line">[arrayC addObject:@2];</div><div class="line">NSLog(@&quot;set=%@&quot;,set);</div><div class="line">    </div><div class="line">NSSet *setB=[set copy];</div><div class="line">NSLog(@&quot;setB=%@&quot;,setB);</div></pre></td></tr></table></figure>
+<p>如上面代码所示使用可变对象时会出现里面有相同元素的情况,而当重新将其浅拷贝的时候则里面内容会转回不可变对象,所以才会恢复正常.</p>
+<h3 id="打印输出黑科技"><a href="#打印输出黑科技" class="headerlink" title="打印输出黑科技"></a>打印输出黑科技</h3><p>重写实体类如下方法然后就可以直接通过NSLog(@”cls=%@”,cls)输出定制的内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">- (NSString *)description &#123;</div><div class="line">    return [NSString stringWithFormat:@&quot;&lt;%@: %p, %@&quot;, [self class],self,@&#123;@&quot;youName&quot;:_youName,                                                                                             @&quot;myName&quot;:_myName&#125;];</div><div class="line">&#125;</div><div class="line">//debug环境下</div><div class="line">- (NSString *)debugDescription &#123;</div><div class="line">//    return [NSString stringWithFormat:@&quot;&lt;%@: %p, %@&quot;, [self class],self,@&#123;@&quot;youName&quot;:_youName,</div><div class="line">//                                                                          @&quot;myName&quot;:_myName&#125;];</div><div class="line">    return [self description];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="替换两个方法的实现"><a href="#替换两个方法的实现" class="headerlink" title="替换两个方法的实现"></a>替换两个方法的实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Method originalMethod=class_getInstanceMethod([NSString class], @selector(lowercaseString));</div><div class="line">Method swappedMethod=class_getInstanceMethod([NSString class], @selector(eoc_myLowercaseString));</div><div class="line">method_exchangeImplementations(originalMethod, swappedMethod);</div></pre></td></tr></table></figure>
+<p>替换两个方法的实现达到输出测试结果的目的(作用范围,整个运行期),或者如AFNetworking中的替换掉NSUrlSession中的resume和suspend方法为自身逻辑服务.</p>
+<h3 id="关联对象方法的使用"><a href="#关联对象方法的使用" class="headerlink" title="关联对象方法的使用"></a>关联对象方法的使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">-(void)loadAlertView&#123;</div><div class="line">    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@&quot;Question&quot; message:@&quot;2333&quot; delegate:self cancelButtonTitle:@&quot;Cancel&quot; otherButtonTitles:@&quot;Submit&quot;, nil];</div><div class="line">    void (^block)(NSInteger) = ^(NSInteger btnIndex)&#123;</div><div class="line">        if (btnIndex==0) &#123;</div><div class="line">            NSLog(@&quot;0000&quot;);</div><div class="line">        &#125;else&#123;</div><div class="line">            NSLog(@&quot;other&quot;);</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">    objc_setAssociatedObject(alert, EOCMYAlertViewKey, block, OBJC_ASSOCIATION_COPY);</div><div class="line">    [alert show];</div><div class="line">&#125;</div><div class="line"></div><div class="line">#pragma mark - UIAlertViewDelegate</div><div class="line">- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex NS_DEPRECATED_IOS(2_0, 9_0)&#123;</div><div class="line">    void (^block)(NSInteger)=objc_getAssociatedObject(alertView, EOCMYAlertViewKey);</div><div class="line">    block(buttonIndex);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用关联对象方法可以把逻辑集中写在定义控件的地方使得逻辑不会过于分散.</p>
+<h3 id="基于运行期OC的Get方法和Set方法的实现"><a href="#基于运行期OC的Get方法和Set方法的实现" class="headerlink" title="基于运行期OC的Get方法和Set方法的实现"></a>基于运行期OC的Get方法和Set方法的实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">//动态方法解析函数</div><div class="line">+(BOOL)resolveInstanceMethod:(SEL)sel&#123;</div><div class="line">    NSString *selectorString=NSStringFromSelector(sel);</div><div class="line">    if ([selectorString hasPrefix:@&quot;set&quot;]) &#123;</div><div class="line">        class_addMethod(self, sel, (IMP)autoDictionarySetter, &quot;v@:@&quot;);</div><div class="line">    &#125;else&#123;</div><div class="line">        class_addMethod(self, sel, (IMP)autoDictionaryGetter, &quot;@@:&quot;);</div><div class="line">    &#125;</div><div class="line">    return YES;</div><div class="line">&#125;</div><div class="line"></div><div class="line">id autoDictionaryGetter(id self,SEL _cmd)&#123;</div><div class="line">    EOCAutoDictionary *typeSelf=(EOCAutoDictionary *)self;</div><div class="line">    NSMutableDictionary *backingStore=typeSelf.backingStore;</div><div class="line">    NSString *key=NSStringFromSelector(_cmd);</div><div class="line">    return [backingStore objectForKey:key];</div><div class="line">&#125;</div><div class="line"></div><div class="line">void autoDictionarySetter(id self,SEL _cmd,id value)&#123;</div><div class="line">    EOCAutoDictionary *typeSelf=(EOCAutoDictionary *)self;</div><div class="line">    NSMutableDictionary *backingStore=typeSelf.backingStore;</div><div class="line">    </div><div class="line">    NSString *selectorString=NSStringFromSelector(_cmd);</div><div class="line">    NSMutableString *key=[selectorString mutableCopy];</div><div class="line">    </div><div class="line">    [key deleteCharactersInRange:NSMakeRange(key.length - 1, 1)];</div><div class="line">    </div><div class="line">    [key deleteCharactersInRange:NSMakeRange(0, 3)];</div><div class="line">    </div><div class="line">    NSString *lowercaseFirstChar=[[key substringToIndex:1] lowercaseString];</div><div class="line">    [key replaceCharactersInRange:NSMakeRange(0, 1) withString:lowercaseFirstChar];</div><div class="line">    if (value) &#123;</div><div class="line">        [backingStore setObject:value forKey:key];</div><div class="line">    &#125;else&#123;</div><div class="line">        [backingStore removeObjectForKey:key];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当对象在收到无法解读的消息后,首先调用其所属类的下列类方法</p>
+<p> +(BOOL)resolveInstanceMethod:(SEL)sel</p>
+<p> 所以可以利用其消息转发机制的这个函数来重新get,set方法,<a href="https://github.com/MyExam-hu/SummaryPro/blob/master/SummaryPro/Class/EOCAutoDictionary.m" target="_blank" rel="external">完整代码链接</a>.</p>
+<h3 id="valueForKeyPath使用总结"><a href="#valueForKeyPath使用总结" class="headerlink" title="valueForKeyPath使用总结"></a>valueForKeyPath使用总结</h3><p>取数组里面数字的最大值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">NSArray * array = [NSArray arrayWithObjects:@0,@50,@9, nil];</div><div class="line">NSInteger max = [[array valueForKeyPath:@&quot;@max.floatValue&quot;] integerValue];</div><div class="line">NSLog(@&quot;%ld&quot;,(long)max);</div></pre></td></tr></table></figure>
+<p>去数组里面数字的平均值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">NSArray *arr = @[@0,@10,@40];</div><div class="line">CGFloat avg = [[arr valueForKeyPath:@&quot;@avg.floatValue&quot;] floatValue];</div><div class="line">NSLog(@&quot;---%f&quot;,avg);</div></pre></td></tr></table></figure>
+<p>剔除重复数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">NSArray *array1 = @[@&quot;name&quot;, @&quot;w&quot;, @&quot;aa&quot;, @&quot;jimsa&quot;, @&quot;aa&quot;];</div><div class="line">NSLog(@&quot;%@&quot;, [array1 valueForKeyPath:@&quot;@distinctUnionOfObjects.self&quot;]);</div></pre></td></tr></table></figure>
+<p>同样可以嵌套使用，先剔除name对应值的重复数据再取值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">NSArray *array2 = @[@&#123;@&quot;name&quot; : @&quot;cookeee&quot;,@&quot;code&quot; : @1&#125;,</div><div class="line">                       @&#123;@&quot;name&quot;: @&quot;jim&quot;,@&quot;code&quot; : @2&#125;,</div><div class="line">                       @&#123;@&quot;name&quot;: @&quot;jim&quot;,@&quot;code&quot; : @1&#125;,</div><div class="line">                       @&#123;@&quot;name&quot;: @&quot;jbos&quot;,@&quot;code&quot; : @1&#125;];</div><div class="line">    </div><div class="line">NSLog(@&quot;%@&quot;, [array2 valueForKeyPath:@&quot;@distinctUnionOfObjects.name&quot;]);</div></pre></td></tr></table></figure>
+<p>执行数组里面的特定属性处理完成后返回一个数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">NSArray *arrayList = @[@&quot;name&quot;, @&quot;w&quot;, @&quot;aa&quot;, @&quot;jimsa&quot;];</div><div class="line">NSLog(@&quot;%@&quot;, [arrayList valueForKeyPath:@&quot;uppercaseString&quot;]);</div></pre></td></tr></table></figure>
+<p>求和、求平均值、最大值、最小值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">NSNumber *sum = [array valueForKeyPath:@&quot;@sum.floatValue&quot;];</div><div class="line">NSNumber *avg = [array valueForKeyPath:@&quot;@avg.floatValue&quot;];</div><div class="line">NSNumber *max = [array valueForKeyPath:@&quot;@max.floatValue&quot;];</div><div class="line">NSNumber *min = [array valueForKeyPath:@&quot;@min.floatValue&quot;];</div></pre></td></tr></table></figure>
+<h3 id="KVO"><a href="#KVO" class="headerlink" title="KVO"></a>KVO</h3><p>添加kvo通知</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[self.dogName addObserver:self forKeyPath:@&quot;masterName&quot; options:NSKeyValueObservingOptionNew context:nil];</div></pre></td></tr></table></figure>
+<p>在实体类中设置通知</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">+(BOOL)automaticallyNotifiesObserversForKey:(NSString *)key&#123;</div><div class="line">    //自动通知</div><div class="line">    if ([key isEqualToString:@&quot;dogNameStr&quot;]) &#123;</div><div class="line">        return YES;</div><div class="line">    &#125;</div><div class="line">    //手动通知</div><div class="line">    if ([key isEqualToString:@&quot;masterName&quot;]) &#123;</div><div class="line">        return NO;</div><div class="line">    &#125;</div><div class="line">    return [super automaticallyNotifiesObserversForKey:key];</div><div class="line">&#125;</div><div class="line"></div><div class="line">-(void)setMasterName:(NSString *)pmasterName&#123;</div><div class="line">    //设置手动通知</div><div class="line">    [self willChangeValueForKey:@&quot;masterName&quot;];</div><div class="line">    @synchronized(self) &#123;</div><div class="line">        _masterName=pmasterName;</div><div class="line">    &#125;</div><div class="line">    [self didChangeValueForKey:@&quot;masterName&quot;];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后在需要通知的界面接收通知</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary&lt;NSKeyValueChangeKey,id&gt; *)change context:(void *)context&#123;</div><div class="line">    if ([object isKindOfClass:[clsDogName class]]) &#123;</div><div class="line">        if ([keyPath isEqualToString:@&quot;dogNameStr&quot;]) &#123;</div><div class="line">            self.lbDogName.text=[change objectForKey:NSKeyValueChangeNewKey];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>主要用于比如在一个界面修改了用户的资料,按保存同时能实时的同步修改用户的资料这样类似的场景.</p>
+<h3 id="NSPredicate谓词筛选器"><a href="#NSPredicate谓词筛选器" class="headerlink" title="NSPredicate谓词筛选器"></a>NSPredicate谓词筛选器</h3><p>把时间小于2016-10-04的时候剔除,重复时间也剔除,然后排序,<a href="http://www.jianshu.com/p/88be28860cde" target="_blank" rel="external">其他用法在这里</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">-(void)loadPredicateTest&#123;</div><div class="line">    //把DATETIME相同时间合并排序,然后再过滤掉2016-10-04号前的日期</div><div class="line">    NSArray *list=@[@&#123;@&quot;DATETIME&quot;:@&quot;2016-10-01&quot;&#125;,</div><div class="line">                    @&#123;@&quot;DATETIME&quot;:@&quot;2016-10-06&quot;&#125;,</div><div class="line">                    @&#123;@&quot;DATETIME&quot;:@&quot;2016-10-05&quot;&#125;,</div><div class="line">                    @&#123;@&quot;DATETIME&quot;:@&quot;2016-10-04&quot;&#125;,</div><div class="line">                    @&#123;@&quot;DATETIME&quot;:@&quot;2016-10-05&quot;&#125;,</div><div class="line">                    @&#123;@&quot;DATETIME&quot;:@&quot;2016-10-03&quot;&#125;,</div><div class="line">                    @&#123;@&quot;DATETIME&quot;:@&quot;2016-10-02&quot;&#125;,</div><div class="line">                    @&#123;@&quot;DATETIME&quot;:@&quot;2016-10-02&quot;&#125;];</div><div class="line">    </div><div class="line">    //把日期过滤</div><div class="line">    NSPredicate *predicate = [NSPredicate predicateWithFormat:@&quot;DATETIME &gt;= &apos;2016-10-04&apos;&quot;];//创建谓词筛选器</div><div class="line">    NSArray *filtrationList = [list filteredArrayUsingPredicate:predicate];</div><div class="line">    //剔除重复数据</div><div class="line">    filtrationList=[filtrationList valueForKeyPath:@&quot;@distinctUnionOfObjects.DATETIME&quot;];</div><div class="line">    //排序</div><div class="line">    NSArray *sortSetArray = [filtrationList sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:nil ascending:NO]]];</div><div class="line">    NSLog(@&quot;%@&quot;,sortSetArray);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/11/多线程/" rel="prev" title="多线程笔记">
+                多线程笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="echo.hu" />
+          <p class="site-author-name" itemprop="name">echo.hu</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#tableViewCell里面图片圆角离屏渲染解决方案"><span class="nav-number">1.</span> <span class="nav-text">tableViewCell里面图片圆角离屏渲染解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字典深浅拷贝"><span class="nav-number">2.</span> <span class="nav-text">字典深浅拷贝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NSMutableSet里面尽量少用不可变对象"><span class="nav-number">3.</span> <span class="nav-text">NSMutableSet里面尽量少用不可变对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打印输出黑科技"><span class="nav-number">4.</span> <span class="nav-text">打印输出黑科技</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#替换两个方法的实现"><span class="nav-number">5.</span> <span class="nav-text">替换两个方法的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关联对象方法的使用"><span class="nav-number">6.</span> <span class="nav-text">关联对象方法的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于运行期OC的Get方法和Set方法的实现"><span class="nav-number">7.</span> <span class="nav-text">基于运行期OC的Get方法和Set方法的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#valueForKeyPath使用总结"><span class="nav-number">8.</span> <span class="nav-text">valueForKeyPath使用总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KVO"><span class="nav-number">9.</span> <span class="nav-text">KVO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NSPredicate谓词筛选器"><span class="nav-number">10.</span> <span class="nav-text">NSPredicate谓词筛选器</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">echo.hu</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
