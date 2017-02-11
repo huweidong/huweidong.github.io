@@ -64,6 +64,8 @@ pagination_dir: page
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: hexo-theme-next-master
+# HeadImage
+avatar: https://avatars1.githubusercontent.com/u/10492108?v=3&u=57297597a2a57bf551d0f0d90ec70756f76dd308&s=400
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
