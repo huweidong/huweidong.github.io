@@ -87,22 +87,19 @@
 
 
 
-<meta name="description" content="主要为了方便查阅容易忘掉的知识点
-NSURLRequestCachePolicy 缓存策略
-NSURLRequestUseProtocolCachePolicy = 0, 默认的缓存策略，如果缓存不存在，直接从服务端获取。如果缓存存在，会根据response中的Cache-Control字段判断下一步操作，如: Cache-Control字段为must-revalidata, 则询问服务端该数据是">
+<meta name="description" content="先是UIImageView+AFNetworking分类主要方法setImageWithURLRequest
+1234- (void)setImageWithURLRequest:(NSURLRequest *)urlRequest              placeholderImage:(UIImage *)placeholderImage                       suc">
 <meta property="og:type" content="article">
-<meta property="og:title" content="查阅笔记">
-<meta property="og:url" content="http://yoursite.com/2016/10/19/查阅笔记/index.html">
+<meta property="og:title" content="AFNetworking图片加载理解">
+<meta property="og:url" content="http://yoursite.com/2017/02/19/AFNetworking图片加载理解/index.html">
 <meta property="og:site_name" content="echo.hu">
-<meta property="og:description" content="主要为了方便查阅容易忘掉的知识点
-NSURLRequestCachePolicy 缓存策略
-NSURLRequestUseProtocolCachePolicy = 0, 默认的缓存策略，如果缓存不存在，直接从服务端获取。如果缓存存在，会根据response中的Cache-Control字段判断下一步操作，如: Cache-Control字段为must-revalidata, 则询问服务端该数据是">
-<meta property="og:updated_time" content="2017-02-19T06:06:58.000Z">
+<meta property="og:description" content="先是UIImageView+AFNetworking分类主要方法setImageWithURLRequest
+1234- (void)setImageWithURLRequest:(NSURLRequest *)urlRequest              placeholderImage:(UIImage *)placeholderImage                       suc">
+<meta property="og:updated_time" content="2017-02-19T07:40:51.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="查阅笔记">
-<meta name="twitter:description" content="主要为了方便查阅容易忘掉的知识点
-NSURLRequestCachePolicy 缓存策略
-NSURLRequestUseProtocolCachePolicy = 0, 默认的缓存策略，如果缓存不存在，直接从服务端获取。如果缓存存在，会根据response中的Cache-Control字段判断下一步操作，如: Cache-Control字段为must-revalidata, 则询问服务端该数据是">
+<meta name="twitter:title" content="AFNetworking图片加载理解">
+<meta name="twitter:description" content="先是UIImageView+AFNetworking分类主要方法setImageWithURLRequest
+1234- (void)setImageWithURLRequest:(NSURLRequest *)urlRequest              placeholderImage:(UIImage *)placeholderImage                       suc">
 
 
 
@@ -130,13 +127,13 @@ NSURLRequestUseProtocolCachePolicy = 0, 默认的缓存策略，如果缓存不�
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/10/19/查阅笔记/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/02/19/AFNetworking图片加载理解/"/>
 
 
 
 
 
-  <title> 查阅笔记 | echo.hu </title>
+  <title> AFNetworking图片加载理解 | echo.hu </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -253,7 +250,7 @@ NSURLRequestUseProtocolCachePolicy = 0, 默认的缓存策略，如果缓存不�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/19/查阅笔记/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/19/AFNetworking图片加载理解/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="echo.hu">
@@ -277,7 +274,7 @@ NSURLRequestUseProtocolCachePolicy = 0, 默认的缓存策略，如果缓存不�
             
             
               
-                查阅笔记
+                AFNetworking图片加载理解
               
             
           </h1>
@@ -292,8 +289,8 @@ NSURLRequestUseProtocolCachePolicy = 0, 默认的缓存策略，如果缓存不�
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-19T13:56:22+08:00">
-                2016-10-19
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-19T14:06:22+08:00">
+                2017-02-19
               </time>
             
 
@@ -328,24 +325,51 @@ NSURLRequestUseProtocolCachePolicy = 0, 默认的缓存策略，如果缓存不�
       
 
       
-        <p>主要为了方便查阅容易忘掉的知识点</p>
-<h3 id="NSURLRequestCachePolicy-缓存策略"><a href="#NSURLRequestCachePolicy-缓存策略" class="headerlink" title="NSURLRequestCachePolicy 缓存策略"></a>NSURLRequestCachePolicy 缓存策略</h3><ul>
-<li><p>NSURLRequestUseProtocolCachePolicy = 0, 默认的缓存策略，如果缓存不存在，直接从服务端获取。如果缓存存在，会根据response中的Cache-Control字段判断下一步操作，如: Cache-Control字段为must-revalidata, 则询问服务端该数据是否有更新，无更新的话直接返回给用户缓存数据，若已更新，则请求服务端.</p>
+        <h3 id="先是UIImageView-AFNetworking分类"><a href="#先是UIImageView-AFNetworking分类" class="headerlink" title="先是UIImageView+AFNetworking分类"></a><a href="https://github.com/MyExam-hu/SummaryPro/blob/master/Pods/AFNetworking/UIKit%2BAFNetworking/UIImageView%2BAFNetworking.m" target="_blank" rel="external">先是UIImageView+AFNetworking分类</a></h3><p><strong>主要方法setImageWithURLRequest</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- (void)setImageWithURLRequest:(NSURLRequest *)urlRequest</div><div class="line">              placeholderImage:(UIImage *)placeholderImage</div><div class="line">                       success:(void (^)(NSURLRequest *request, NSHTTPURLResponse * _Nullable response, UIImage *image))success</div><div class="line">                       failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse * _Nullable response, NSError *error))failure</div></pre></td></tr></table></figure>
+<p>该方法主要做了如下几件事:</p>
+<ul>
+<li><p>如果请求的url为空则直接设置占位符图片为最终图片。</p>
 </li>
-<li><p>NSURLRequestReloadIgnoringLocalCacheData = 1, 忽略本地缓存数据，直接请求服务端.</p>
+<li><p>当前的回调的request和需要请求的request是不是为同一个，是的话则判断为重复调用，直接返回。</p>
 </li>
-<li><p>NSURLRequestIgnoringLocalAndRemoteCacheData = 4, 忽略本地缓存，并且移除本地缓存，代理服务器以及其他中介，直接请求源服务端.</p>
+<li><p>开始请求前，先取消之前的task,即解绑回调。</p>
 </li>
-<li><p>NSURLRequestReloadIgnoringCacheData = NSURLRequestReloadIgnoringLocalCacheData</p>
+<li><p>从缓存中根据这个请求获取缓存,如果有缓存则直接回调成功方法块。（这里和后面设置从网络请求数据中设置的缓存策略相对应）</p>
 </li>
-<li><p>NSURLRequestReturnCacheDataElseLoad = 2, 有缓存就使用，不管其有效性(即忽略Cache-Control字段), 无则请求服务端.</p>
-</li>
-<li><p>NSURLRequestReturnCacheDataDontLoad = 3, 死活加载本地缓存. 没有就失败. (确定当前无网络时使用)</p>
-</li>
-<li><p>NSURLRequestReloadRevalidatingCacheData = 5, 缓存数据必须得得到服务端确认有效才使用(貌似是NSURLRequestUseProtocolCachePolicy中的一种情况)</p>
+<li><p>无缓存有占位符图片则设置占位符图片。然后去下载图片，并得到一个receipt(AFImageDownloadReceipt对象)，可以用来取消回调，分别传入成功回调方法块 <strong>(判断receiptID和downloadID是否相同 成功回调，设置图片，清空receipt)</strong> 和失败回调方法块 <strong>(清空receipt，回调上层失败方法块)</strong></p>
 </li>
 </ul>
-
+<h3 id="然后是AFImageDownloader类"><a href="#然后是AFImageDownloader类" class="headerlink" title="然后是AFImageDownloader类"></a><a href="https://github.com/MyExam-hu/SummaryPro/blob/master/Pods/AFNetworking/UIKit%2BAFNetworking/AFImageDownloader.m" target="_blank" rel="external">然后是AFImageDownloader类</a></h3><p>这个类里面的方法主要负责从网络加载图片，当然如果本地有缓存也会优先获取缓存</p>
+<p><strong>主要方法downloadImageForURLRequest:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- (nullable AFImageDownloadReceipt *)downloadImageForURLRequest:(NSURLRequest *)request</div><div class="line">                                                  withReceiptID:(nonnull NSUUID *)receiptID</div><div class="line">                                                        success:(nullable void (^)(NSURLRequest *request, NSHTTPURLResponse  * _Nullable response, UIImage *responseObject))success</div><div class="line">                                                        failure:(nullable void (^)(NSURLRequest *request, NSHTTPURLResponse * _Nullable response, NSError *error))failure</div></pre></td></tr></table></figure>
+<p>该方法主要做了如下几件事(方法里面皆为同步串行处理):</p>
+<ul>
+<li><p>判断请求的url是否为空，如果为空则直接返回错误信息。</p>
+</li>
+<li><p>判断这个任务是否已经存在，存在则添加成功失败Block,然后直接返回，即一个url用一个request,可以响应好几个block(防止重复请求)</p>
+</li>
+<li><p>根据request的缓存策略，加载缓存，如果有缓存则直接加载成功方法块(缓存类AFAutoPurgingImageCache下面总结)</p>
+</li>
+</ul>
+<ul>
+<li>用sessionManager(AFHTTPSessionManager)去请求，注意，只是创建task,还是挂起状态。回调处理方法块如下(方法里面皆为异步并行处理)：<ul>
+<li>请求完毕，安全移除AF task，并返回当前被移除的AF task</li>
+<li>如果请求失败则遍历AF task里面的失败方法，并在主线程里面回调</li>
+<li>如果请求成功则遍历AF task里面的成功方法，并在主线程里面回调</li>
+<li>回调完成，减少活跃的任务数，如果可以，则开启下一个任务</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>根据createdTask任务创建mergedTask并往当前任务字典里添加任务</p>
+</li>
+<li><p>判断当前并行限制数，如果小于，则开始任务下载resume，否则等待</p>
+</li>
+<li><p>然后则回到AF里面的各种委托回调了</p>
+</li>
+</ul>
+<h3 id="接下来是AFAutoPurgingImageCache类"><a href="#接下来是AFAutoPurgingImageCache类" class="headerlink" title="接下来是AFAutoPurgingImageCache类"></a><a href="https://github.com/MyExam-hu/SummaryPro/blob/master/Pods/AFNetworking/UIKit%2BAFNetworking/AFAutoPurgingImageCache.m" target="_blank" rel="external">接下来是AFAutoPurgingImageCache类</a></h3>
       
     </div>
 
@@ -375,15 +399,15 @@ NSURLRequestUseProtocolCachePolicy = 0, 默认的缓存策略，如果缓存不�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/02/11/runtime/" rel="next" title="runtime笔记">
+                <i class="fa fa-chevron-left"></i> runtime笔记
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/08/AFNetworking流程总结/" rel="prev" title="AFNetworking流程总结">
-                AFNetworking流程总结 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -492,7 +516,7 @@ NSURLRequestUseProtocolCachePolicy = 0, 默认的缓存策略，如果缓存不�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#NSURLRequestCachePolicy-缓存策略"><span class="nav-number">1.</span> <span class="nav-text">NSURLRequestCachePolicy 缓存策略</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#先是UIImageView-AFNetworking分类"><span class="nav-number">1.</span> <span class="nav-text">先是UIImageView+AFNetworking分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#然后是AFImageDownloader类"><span class="nav-number">2.</span> <span class="nav-text">然后是AFImageDownloader类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接下来是AFAutoPurgingImageCache类"><span class="nav-number">3.</span> <span class="nav-text">接下来是AFAutoPurgingImageCache类</span></a></li></ol></div>
             
 
           </div>
