@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="echo.hu">
 <meta property="og:description" content="先是UIImageView+AFNetworking分类主要方法setImageWithURLRequest
 1234- (void)setImageWithURLRequest:(NSURLRequest *)urlRequest              placeholderImage:(UIImage *)placeholderImage                       suc">
-<meta property="og:updated_time" content="2017-02-19T07:40:51.000Z">
+<meta property="og:updated_time" content="2017-02-19T07:44:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AFNetworking图片加载理解">
 <meta name="twitter:description" content="先是UIImageView+AFNetworking分类主要方法setImageWithURLRequest
@@ -369,7 +369,8 @@
 <li><p>然后则回到AF里面的各种委托回调了</p>
 </li>
 </ul>
-<h3 id="接下来是AFAutoPurgingImageCache类"><a href="#接下来是AFAutoPurgingImageCache类" class="headerlink" title="接下来是AFAutoPurgingImageCache类"></a><a href="https://github.com/MyExam-hu/SummaryPro/blob/master/Pods/AFNetworking/UIKit%2BAFNetworking/AFAutoPurgingImageCache.m" target="_blank" rel="external">接下来是AFAutoPurgingImageCache类</a></h3>
+<h3 id="接下来是AFAutoPurgingImageCache类"><a href="#接下来是AFAutoPurgingImageCache类" class="headerlink" title="接下来是AFAutoPurgingImageCache类"></a><a href="https://github.com/MyExam-hu/SummaryPro/blob/master/Pods/AFNetworking/UIKit%2BAFNetworking/AFAutoPurgingImageCache.m" target="_blank" rel="external">接下来是AFAutoPurgingImageCache类</a></h3><p>主要方法是addImage，作用是用来添加image到cache里里面，同时这个方法会判断当前的缓存是否有溢出，如果有溢出则会根据时间的排序取出最早时候的缓存不断清除，知道到达没有溢出最大设置缓存为止。方法比较简单，直接点链接看吧!</p>
+
       
     </div>
 
