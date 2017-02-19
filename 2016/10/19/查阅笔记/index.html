@@ -87,19 +87,22 @@
 
 
 
-<meta name="description" content="AFNetworking流程总结一.调用POST或GET方法,并把成功、失败方法块传入.二.调用dataTaskWithHTTPMethod方法返回NSURLSessionDataTask对象dataTask(下面是生成NSURLSessionDataTask对象的时候里面做的事情)(1).根据POST或GET方法、URL、参数生成NSMutableURLRequest对象request
-判断参数">
+<meta name="description" content="主要为了方便查阅容易忘掉的知识点
+NSURLRequestCachePolicy 缓存策略
+NSURLRequestUseProtocolCachePolicy = 0, 默认的缓存策略，如果缓存不存在，直接从服务端获取。如果缓存存在，会根据response中的Cache-Control字段判断下一步操作，如: Cache-Control字段为must-revalidata, 则询问服务端该数据是">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AFNetworking流程总结">
-<meta property="og:url" content="http://yoursite.com/2016/11/08/AFNetworking流程总结/index.html">
+<meta property="og:title" content="查阅笔记">
+<meta property="og:url" content="http://yoursite.com/2016/10/19/查阅笔记/index.html">
 <meta property="og:site_name" content="echo.hu">
-<meta property="og:description" content="AFNetworking流程总结一.调用POST或GET方法,并把成功、失败方法块传入.二.调用dataTaskWithHTTPMethod方法返回NSURLSessionDataTask对象dataTask(下面是生成NSURLSessionDataTask对象的时候里面做的事情)(1).根据POST或GET方法、URL、参数生成NSMutableURLRequest对象request
-判断参数">
-<meta property="og:updated_time" content="2017-02-11T15:05:40.000Z">
+<meta property="og:description" content="主要为了方便查阅容易忘掉的知识点
+NSURLRequestCachePolicy 缓存策略
+NSURLRequestUseProtocolCachePolicy = 0, 默认的缓存策略，如果缓存不存在，直接从服务端获取。如果缓存存在，会根据response中的Cache-Control字段判断下一步操作，如: Cache-Control字段为must-revalidata, 则询问服务端该数据是">
+<meta property="og:updated_time" content="2017-02-19T06:06:58.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AFNetworking流程总结">
-<meta name="twitter:description" content="AFNetworking流程总结一.调用POST或GET方法,并把成功、失败方法块传入.二.调用dataTaskWithHTTPMethod方法返回NSURLSessionDataTask对象dataTask(下面是生成NSURLSessionDataTask对象的时候里面做的事情)(1).根据POST或GET方法、URL、参数生成NSMutableURLRequest对象request
-判断参数">
+<meta name="twitter:title" content="查阅笔记">
+<meta name="twitter:description" content="主要为了方便查阅容易忘掉的知识点
+NSURLRequestCachePolicy 缓存策略
+NSURLRequestUseProtocolCachePolicy = 0, 默认的缓存策略，如果缓存不存在，直接从服务端获取。如果缓存存在，会根据response中的Cache-Control字段判断下一步操作，如: Cache-Control字段为must-revalidata, 则询问服务端该数据是">
 
 
 
@@ -127,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/11/08/AFNetworking流程总结/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/10/19/查阅笔记/"/>
 
 
 
 
 
-  <title> AFNetworking流程总结 | echo.hu </title>
+  <title> 查阅笔记 | echo.hu </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -250,7 +253,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/08/AFNetworking流程总结/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/19/查阅笔记/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="echo.hu">
@@ -274,7 +277,7 @@
             
             
               
-                AFNetworking流程总结
+                查阅笔记
               
             
           </h1>
@@ -289,8 +292,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-08T15:22:22+08:00">
-                2016-11-08
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-19T13:56:22+08:00">
+                2016-10-19
               </time>
             
 
@@ -325,23 +328,24 @@
       
 
       
-        <h1 id="AFNetworking流程总结"><a href="#AFNetworking流程总结" class="headerlink" title="AFNetworking流程总结"></a>AFNetworking流程总结</h1><h3 id="一-调用POST或GET方法-并把成功、失败方法块传入"><a href="#一-调用POST或GET方法-并把成功、失败方法块传入" class="headerlink" title="一.调用POST或GET方法,并把成功、失败方法块传入."></a>一.调用POST或GET方法,并把成功、失败方法块传入.</h3><h3 id="二-调用dataTaskWithHTTPMethod方法返回NSURLSessionDataTask对象dataTask-下面是生成NSURLSessionDataTask对象的时候里面做的事情"><a href="#二-调用dataTaskWithHTTPMethod方法返回NSURLSessionDataTask对象dataTask-下面是生成NSURLSessionDataTask对象的时候里面做的事情" class="headerlink" title="二.调用dataTaskWithHTTPMethod方法返回NSURLSessionDataTask对象dataTask(下面是生成NSURLSessionDataTask对象的时候里面做的事情)"></a>二.调用dataTaskWithHTTPMethod方法返回NSURLSessionDataTask对象dataTask(下面是生成NSURLSessionDataTask对象的时候里面做的事情)</h3><h4 id="1-根据POST或GET方法、URL、参数生成NSMutableURLRequest对象request"><a href="#1-根据POST或GET方法、URL、参数生成NSMutableURLRequest对象request" class="headerlink" title="(1).根据POST或GET方法、URL、参数生成NSMutableURLRequest对象request"></a>(1).根据POST或GET方法、URL、参数生成NSMutableURLRequest对象request</h4><ul>
-<li><p>判断参数有效与否</p>
+        <p>主要为了方便查阅容易忘掉的知识点</p>
+<h3 id="NSURLRequestCachePolicy-缓存策略"><a href="#NSURLRequestCachePolicy-缓存策略" class="headerlink" title="NSURLRequestCachePolicy 缓存策略"></a>NSURLRequestCachePolicy 缓存策略</h3><ul>
+<li><p>NSURLRequestUseProtocolCachePolicy = 0, 默认的缓存策略，如果缓存不存在，直接从服务端获取。如果缓存存在，会根据response中的Cache-Control字段判断下一步操作，如: Cache-Control字段为must-revalidata, 则询问服务端该数据是否有更新，无更新的话直接返回给用户缓存数据，若已更新，则请求服务端.</p>
 </li>
-<li><p>根据URL和HTTPMethod方法类型初始化NSMutableURLRequest对象</p>
+<li><p>NSURLRequestReloadIgnoringLocalCacheData = 1, 忽略本地缓存数据，直接请求服务端.</p>
 </li>
-<li><p>self.mutableObservedChangedKeyPaths里面的值会在初始化requestSerializer中相关的属性的时候通过kvo赋值或移除</p>
+<li><p>NSURLRequestIgnoringLocalAndRemoteCacheData = 4, 忽略本地缓存，并且移除本地缓存，代理服务器以及其他中介，直接请求源服务端.</p>
 </li>
-<li><p>根据初始化选择的可序列化的类型(json、html、xml)调用不同类的方法赋值给mutableRequest</p>
+<li><p>NSURLRequestReloadIgnoringCacheData = NSURLRequestReloadIgnoringLocalCacheData</p>
+</li>
+<li><p>NSURLRequestReturnCacheDataElseLoad = 2, 有缓存就使用，不管其有效性(即忽略Cache-Control字段), 无则请求服务端.</p>
+</li>
+<li><p>NSURLRequestReturnCacheDataDontLoad = 3, 死活加载本地缓存. 没有就失败. (确定当前无网络时使用)</p>
+</li>
+<li><p>NSURLRequestReloadRevalidatingCacheData = 5, 缓存数据必须得得到服务端确认有效才使用(貌似是NSURLRequestUseProtocolCachePolicy中的一种情况)</p>
 </li>
 </ul>
-<h4 id="2-根据-1-中生成的request对象并传入上传进度、下载进度方法块生成NSURLSessionDataTask对象并传入回调方法块-回调方法块里面根据返回的参数选择调用成功或失败方法块"><a href="#2-根据-1-中生成的request对象并传入上传进度、下载进度方法块生成NSURLSessionDataTask对象并传入回调方法块-回调方法块里面根据返回的参数选择调用成功或失败方法块" class="headerlink" title="(2).根据(1)中生成的request对象并传入上传进度、下载进度方法块生成NSURLSessionDataTask对象并传入回调方法块(回调方法块里面根据返回的参数选择调用成功或失败方法块)"></a>(2).根据(1)中生成的request对象并传入上传进度、下载进度方法块生成NSURLSessionDataTask对象并传入回调方法块(回调方法块里面根据返回的参数选择调用成功或失败方法块)</h4><ul>
-<li><p>判断线程安全</p>
-</li>
-<li><p>根据NSURLSessionDataTask对象dataTask绑定方法块(成功回调方法块、下载上传进度方法块)和委托,并添加相关通知如暂停任务和继续任务通知、添加相关任务属性kov的检测如countOfBytesReceived，countOfBytesExpectedToReceive属性等</p>
-</li>
-</ul>
-<h3 id="三-调用dataTask对象的方法resume发送网络请求"><a href="#三-调用dataTask对象的方法resume发送网络请求" class="headerlink" title="三.调用dataTask对象的方法resume发送网络请求"></a>三.调用dataTask对象的方法resume发送网络请求</h3><h3 id="四-然后从网络请求委托回调返回数据转发给AFURLSessionManagerTaskDelegate委托中的对应的方法"><a href="#四-然后从网络请求委托回调返回数据转发给AFURLSessionManagerTaskDelegate委托中的对应的方法" class="headerlink" title="四.然后从网络请求委托回调返回数据转发给AFURLSessionManagerTaskDelegate委托中的对应的方法"></a>四.然后从网络请求委托回调返回数据转发给AFURLSessionManagerTaskDelegate委托中的对应的方法</h3><h3 id="五-解析数据，然后从AFURLSessionManagerTaskDelegate中取出completionHandler方法块回调-解析数据是在另外开一个进程里面解析的"><a href="#五-解析数据，然后从AFURLSessionManagerTaskDelegate中取出completionHandler方法块回调-解析数据是在另外开一个进程里面解析的" class="headerlink" title="五.解析数据，然后从AFURLSessionManagerTaskDelegate中取出completionHandler方法块回调(解析数据是在另外开一个进程里面解析的)"></a>五.解析数据，然后从AFURLSessionManagerTaskDelegate中取出completionHandler方法块回调(解析数据是在另外开一个进程里面解析的)</h3>
+
       
     </div>
 
@@ -371,18 +375,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/19/查阅笔记/" rel="next" title="查阅笔记">
-                <i class="fa fa-chevron-left"></i> 查阅笔记
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/01/10/总结/" rel="prev" title="tips笔记总结">
-                tips笔记总结 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/11/08/AFNetworking流程总结/" rel="prev" title="AFNetworking流程总结">
+                AFNetworking流程总结 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -492,7 +492,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AFNetworking流程总结"><span class="nav-number">1.</span> <span class="nav-text">AFNetworking流程总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-调用POST或GET方法-并把成功、失败方法块传入"><span class="nav-number">1.0.1.</span> <span class="nav-text">一.调用POST或GET方法,并把成功、失败方法块传入.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-调用dataTaskWithHTTPMethod方法返回NSURLSessionDataTask对象dataTask-下面是生成NSURLSessionDataTask对象的时候里面做的事情"><span class="nav-number">1.0.2.</span> <span class="nav-text">二.调用dataTaskWithHTTPMethod方法返回NSURLSessionDataTask对象dataTask(下面是生成NSURLSessionDataTask对象的时候里面做的事情)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-根据POST或GET方法、URL、参数生成NSMutableURLRequest对象request"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">(1).根据POST或GET方法、URL、参数生成NSMutableURLRequest对象request</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-根据-1-中生成的request对象并传入上传进度、下载进度方法块生成NSURLSessionDataTask对象并传入回调方法块-回调方法块里面根据返回的参数选择调用成功或失败方法块"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">(2).根据(1)中生成的request对象并传入上传进度、下载进度方法块生成NSURLSessionDataTask对象并传入回调方法块(回调方法块里面根据返回的参数选择调用成功或失败方法块)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-调用dataTask对象的方法resume发送网络请求"><span class="nav-number">1.0.3.</span> <span class="nav-text">三.调用dataTask对象的方法resume发送网络请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-然后从网络请求委托回调返回数据转发给AFURLSessionManagerTaskDelegate委托中的对应的方法"><span class="nav-number">1.0.4.</span> <span class="nav-text">四.然后从网络请求委托回调返回数据转发给AFURLSessionManagerTaskDelegate委托中的对应的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五-解析数据，然后从AFURLSessionManagerTaskDelegate中取出completionHandler方法块回调-解析数据是在另外开一个进程里面解析的"><span class="nav-number">1.0.5.</span> <span class="nav-text">五.解析数据，然后从AFURLSessionManagerTaskDelegate中取出completionHandler方法块回调(解析数据是在另外开一个进程里面解析的)</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#NSURLRequestCachePolicy-缓存策略"><span class="nav-number">1.</span> <span class="nav-text">NSURLRequestCachePolicy 缓存策略</span></a></li></ol></div>
             
 
           </div>
