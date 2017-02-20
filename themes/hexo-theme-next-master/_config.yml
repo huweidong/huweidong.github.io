@@ -36,10 +36,10 @@ seo: false
 
 # When running the site in a subdirectory (e.g. domain.tld/blog), remove the leading slash (/archives -> archives)
 menu:
-  home: /archives
+  home: /
   #categories: /categories
   about: https://github.com/huweidong
-  archives: /
+  archives: /archives
   #tags: /tags
   #sitemap: /sitemap.xml
   #commonweal: /404.html
@@ -70,9 +70,9 @@ menu_icons:
 # ---------------------------------------------------------------
 
 # Schemes
-scheme: Muse
+#scheme: Muse
 #scheme: Mist
-#scheme: Pisces
+scheme: Pisces
 
 
 # ---------------------------------------------------------------
