@@ -5,6 +5,8 @@ date: 2017-02-11 14:06:22
 
 ### 获取列表
 
+<!-- more -->
+
 ```
 -(void)runtimeLearn{
     unsigned int count;
