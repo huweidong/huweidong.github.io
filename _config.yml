@@ -9,6 +9,7 @@ description:
 author: echo.hu
 language: zh-Hans
 timezone:
+duoshuo_shortname: huweidong
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -74,3 +75,4 @@ deploy:
   type: git
   repo: https://github.com/huweidong/huweidong.github.io
   branch: master
+

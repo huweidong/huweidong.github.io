@@ -10,6 +10,7 @@ date: 2016-11-08 15:22:22
 
 #### (1).根据POST或GET方法、URL、参数生成NSMutableURLRequest对象request
 
+
 * 判断参数有效与否
 
 * 根据URL和HTTPMethod方法类型初始化NSMutableURLRequest对象
