@@ -4,7 +4,7 @@ date: 2017-03-30 11:06:22
 ---
 # 关于使用AFNetworking内存泄露的问题
 
-这几天做完项目于是用instruments里面的Leaks检查了下内存情况,结果发现了一些AF里面的坑，AF Issues上面也有[哥们]("https://github.com/AFNetworking/AFNetworking/issues/3293")提出问题来，不过也并没有解释清楚，所以特意自己重新看了遍源码整理了下.
+这几天做完项目于是用instruments里面的Leaks检查了下内存情况,结果发现了一些AF里面的坑，AF Issues上面也有[哥们](https://github.com/AFNetworking/AFNetworking/issues/3293)提出问题来，不过也并没有解释清楚，所以特意自己重新看了遍源码整理了下.
 
 下面是我报内存泄露的部分代码
 
