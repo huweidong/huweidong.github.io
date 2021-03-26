@@ -87,19 +87,22 @@
 
 
 
-<meta name="description" content="AFNetworking流程总结一.调用POST或GET方法,并把成功、失败方法块传入.二.调用dataTaskWithHTTPMethod方法返回NSURLSessionDataTask对象dataTask(下面是生成NSURLSessionDataTask对象的时候里面做的事情)(1).根据POST或GET方法、URL、参数生成NSMutableURLRequest对象request
-判断参数">
+<meta name="description" content="关于使用AFNetworking内存泄露的问题这几天做完项目于是用instruments里面的Leaks检查了下内存情况,结果发现了一些AF里面的坑，AF Issues上面也有哥们提出问题来，不过也并没有解释清楚，所以特意自己重新看了遍源码整理了下.
+下面是我报内存泄露的部分代码
+123456789101112- (instancetype)init&amp;#123;    self = [super">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AFNetworking流程总结">
-<meta property="og:url" content="http://yoursite.com/2016/11/08/AFNetworking流程总结/index.html">
+<meta property="og:title" content="AFNetworking内存泄露的问题">
+<meta property="og:url" content="http://yoursite.com/2017/03/30/关于使用AFNetworking内存泄露的问题/index.html">
 <meta property="og:site_name" content="echo.hu">
-<meta property="og:description" content="AFNetworking流程总结一.调用POST或GET方法,并把成功、失败方法块传入.二.调用dataTaskWithHTTPMethod方法返回NSURLSessionDataTask对象dataTask(下面是生成NSURLSessionDataTask对象的时候里面做的事情)(1).根据POST或GET方法、URL、参数生成NSMutableURLRequest对象request
-判断参数">
-<meta property="og:updated_time" content="2017-03-24T03:32:19.000Z">
+<meta property="og:description" content="关于使用AFNetworking内存泄露的问题这几天做完项目于是用instruments里面的Leaks检查了下内存情况,结果发现了一些AF里面的坑，AF Issues上面也有哥们提出问题来，不过也并没有解释清楚，所以特意自己重新看了遍源码整理了下.
+下面是我报内存泄露的部分代码
+123456789101112- (instancetype)init&amp;#123;    self = [super">
+<meta property="og:updated_time" content="2021-03-26T08:14:23.352Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AFNetworking流程总结">
-<meta name="twitter:description" content="AFNetworking流程总结一.调用POST或GET方法,并把成功、失败方法块传入.二.调用dataTaskWithHTTPMethod方法返回NSURLSessionDataTask对象dataTask(下面是生成NSURLSessionDataTask对象的时候里面做的事情)(1).根据POST或GET方法、URL、参数生成NSMutableURLRequest对象request
-判断参数">
+<meta name="twitter:title" content="AFNetworking内存泄露的问题">
+<meta name="twitter:description" content="关于使用AFNetworking内存泄露的问题这几天做完项目于是用instruments里面的Leaks检查了下内存情况,结果发现了一些AF里面的坑，AF Issues上面也有哥们提出问题来，不过也并没有解释清楚，所以特意自己重新看了遍源码整理了下.
+下面是我报内存泄露的部分代码
+123456789101112- (instancetype)init&amp;#123;    self = [super">
 
 
 
@@ -127,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/11/08/AFNetworking流程总结/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/03/30/关于使用AFNetworking内存泄露的问题/"/>
 
 
 
 
 
-  <title> AFNetworking流程总结 | echo.hu </title>
+  <title> AFNetworking内存泄露的问题 | echo.hu </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -250,7 +253,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/08/AFNetworking流程总结/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/30/关于使用AFNetworking内存泄露的问题/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="echo.hu">
@@ -274,7 +277,7 @@
             
             
               
-                AFNetworking流程总结
+                AFNetworking内存泄露的问题
               
             
           </h1>
@@ -289,8 +292,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-08T15:22:22+08:00">
-                2016-11-08
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-30T11:06:22+08:00">
+                2017-03-30
               </time>
             
 
@@ -308,8 +311,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2016/11/08/AFNetworking流程总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/08/AFNetworking流程总结/" itemprop="commentCount"></span>
+                <a href="/2017/03/30/关于使用AFNetworking内存泄露的问题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/30/关于使用AFNetworking内存泄露的问题/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -317,7 +320,7 @@
 
           
           
-             <span id="/2016/11/08/AFNetworking流程总结/" class="leancloud_visitors" data-flag-title="AFNetworking流程总结">
+             <span id="/2017/03/30/关于使用AFNetworking内存泄露的问题/" class="leancloud_visitors" data-flag-title="AFNetworking内存泄露的问题">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -346,23 +349,21 @@
       
 
       
-        <h1 id="AFNetworking流程总结"><a href="#AFNetworking流程总结" class="headerlink" title="AFNetworking流程总结"></a>AFNetworking流程总结</h1><h3 id="一-调用POST或GET方法-并把成功、失败方法块传入"><a href="#一-调用POST或GET方法-并把成功、失败方法块传入" class="headerlink" title="一.调用POST或GET方法,并把成功、失败方法块传入."></a>一.调用POST或GET方法,并把成功、失败方法块传入.</h3><h3 id="二-调用dataTaskWithHTTPMethod方法返回NSURLSessionDataTask对象dataTask-下面是生成NSURLSessionDataTask对象的时候里面做的事情"><a href="#二-调用dataTaskWithHTTPMethod方法返回NSURLSessionDataTask对象dataTask-下面是生成NSURLSessionDataTask对象的时候里面做的事情" class="headerlink" title="二.调用dataTaskWithHTTPMethod方法返回NSURLSessionDataTask对象dataTask(下面是生成NSURLSessionDataTask对象的时候里面做的事情)"></a>二.调用dataTaskWithHTTPMethod方法返回NSURLSessionDataTask对象dataTask(下面是生成NSURLSessionDataTask对象的时候里面做的事情)</h3><h4 id="1-根据POST或GET方法、URL、参数生成NSMutableURLRequest对象request"><a href="#1-根据POST或GET方法、URL、参数生成NSMutableURLRequest对象request" class="headerlink" title="(1).根据POST或GET方法、URL、参数生成NSMutableURLRequest对象request"></a>(1).根据POST或GET方法、URL、参数生成NSMutableURLRequest对象request</h4><ul>
-<li><p>判断参数有效与否</p>
-</li>
-<li><p>根据URL和HTTPMethod方法类型初始化NSMutableURLRequest对象</p>
-</li>
-<li><p>self.mutableObservedChangedKeyPaths里面的值会在初始化requestSerializer中相关的属性的时候通过kvo赋值或移除</p>
-</li>
-<li><p>根据初始化选择的可序列化的类型(json、html、xml)调用不同类的方法赋值给mutableRequest</p>
-</li>
-</ul>
-<h4 id="2-根据-1-中生成的request对象并传入上传进度、下载进度方法块生成NSURLSessionDataTask对象并传入回调方法块-回调方法块里面根据返回的参数选择调用成功或失败方法块"><a href="#2-根据-1-中生成的request对象并传入上传进度、下载进度方法块生成NSURLSessionDataTask对象并传入回调方法块-回调方法块里面根据返回的参数选择调用成功或失败方法块" class="headerlink" title="(2).根据(1)中生成的request对象并传入上传进度、下载进度方法块生成NSURLSessionDataTask对象并传入回调方法块(回调方法块里面根据返回的参数选择调用成功或失败方法块)"></a>(2).根据(1)中生成的request对象并传入上传进度、下载进度方法块生成NSURLSessionDataTask对象并传入回调方法块(回调方法块里面根据返回的参数选择调用成功或失败方法块)</h4><ul>
-<li><p>判断线程安全</p>
-</li>
-<li><p>根据NSURLSessionDataTask对象dataTask绑定方法块(成功回调方法块、下载上传进度方法块)和委托,并添加相关通知如暂停任务和继续任务通知、添加相关任务属性kov的检测如countOfBytesReceived，countOfBytesExpectedToReceive属性等</p>
-</li>
-</ul>
-<h3 id="三-调用dataTask对象的方法resume发送网络请求"><a href="#三-调用dataTask对象的方法resume发送网络请求" class="headerlink" title="三.调用dataTask对象的方法resume发送网络请求"></a>三.调用dataTask对象的方法resume发送网络请求</h3><h3 id="四-然后从网络请求委托回调返回数据转发给AFURLSessionManagerTaskDelegate委托中的对应的方法"><a href="#四-然后从网络请求委托回调返回数据转发给AFURLSessionManagerTaskDelegate委托中的对应的方法" class="headerlink" title="四.然后从网络请求委托回调返回数据转发给AFURLSessionManagerTaskDelegate委托中的对应的方法"></a>四.然后从网络请求委托回调返回数据转发给AFURLSessionManagerTaskDelegate委托中的对应的方法</h3><h3 id="五-解析数据，然后从AFURLSessionManagerTaskDelegate中取出completionHandler方法块回调-解析数据是在另外开一个进程里面解析的"><a href="#五-解析数据，然后从AFURLSessionManagerTaskDelegate中取出completionHandler方法块回调-解析数据是在另外开一个进程里面解析的" class="headerlink" title="五.解析数据，然后从AFURLSessionManagerTaskDelegate中取出completionHandler方法块回调(解析数据是在另外开一个进程里面解析的)"></a>五.解析数据，然后从AFURLSessionManagerTaskDelegate中取出completionHandler方法块回调(解析数据是在另外开一个进程里面解析的)</h3>
+        <h1 id="关于使用AFNetworking内存泄露的问题"><a href="#关于使用AFNetworking内存泄露的问题" class="headerlink" title="关于使用AFNetworking内存泄露的问题"></a>关于使用AFNetworking内存泄露的问题</h1><p>这几天做完项目于是用instruments里面的Leaks检查了下内存情况,结果发现了一些AF里面的坑，AF Issues上面也有<a href="https://github.com/AFNetworking/AFNetworking/issues/3293" target="_blank" rel="external">哥们</a>提出问题来，不过也并没有解释清楚，所以特意自己重新看了遍源码整理了下.</p>
+<p>下面是我报内存泄露的部分代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">- (instancetype)init</div><div class="line">&#123;</div><div class="line">    self = [super init];</div><div class="line">    if (self) &#123;</div><div class="line">        self.manager=[AFHTTPSessionManager manager];</div><div class="line">        self.manager.requestSerializer=[AFJSONRequestSerializer serializer];</div><div class="line">        self.manager.requestSerializer.timeoutInterval=30;</div><div class="line">        self.manager.responseSerializer=[AFJSONResponseSerializer serializer];</div><div class="line">        self.manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@&quot;application/json&quot;];</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里的manager方法并不是单例方法，也就是说一个manager对象会对应一个或多个NSURLSession对象，这样创建会造成内存增长，但是这样应该并不会造成内存泄露才对，况且我在dealloc方法里面已经把manager置空，于是我查找苹果官方文档，找到如下信息</p>
+<p>Important</p>
+<p>The session object keeps a strong reference to the delegate until your app exits or explicitly invalidates the session. If you do not invalidate the session, your app leaks memory until it exits.</p>
+<p>大意如下：</p>
+<p>会话对象保持对代理的强烈引用，直到您的应用程序退出或显式使会话无效。 如果您不使会话无效，您的应用程序会在内存溢出之前泄漏内存。</p>
+<p>然后我在AF的源码里面的initWithSessionConfiguration方法找到如下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">@property (readwrite, nonatomic, strong) NSURLSession *session;</div><div class="line"></div><div class="line">self.session = [NSURLSession sessionWithConfiguration:self.sessionConfiguration delegate:self delegateQueue:self.operationQueue];</div></pre></td></tr></table></figure>
+<p>那么答案就出来了session被AFNetworkReachabilityManager对象强引用了，session的委托又强持有了AFNetworkReachabilityManager对象，所以导致AFNetworkReachabilityManager对象置空后session依然存在，从而导致内存泄漏了</p>
+<p>所以，正确的用法应该在AF上面再封装多一层把manager写成单例，降低内存峰值，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">+ (AFHTTPSessionManager *)sharedManager &#123;</div><div class="line">    static dispatch_once_t onceToken;</div><div class="line">    dispatch_once(&amp;onceToken, ^&#123;</div><div class="line">        manager=[AFHTTPSessionManager manager];</div><div class="line">        manager.requestSerializer=[AFJSONRequestSerializer serializer];</div><div class="line">        manager.requestSerializer.timeoutInterval=30;</div><div class="line">        manager.responseSerializer=[AFJSONResponseSerializer serializer];</div><div class="line">        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@&quot;application/json&quot;];</div><div class="line">    &#125;);</div><div class="line">    return manager;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用则直接[封装类名 sharedManager] POST如此使用即可.</p>
+
       
     </div>
 
@@ -392,8 +393,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/19/查阅笔记/" rel="next" title="查阅笔记">
-                <i class="fa fa-chevron-left"></i> 查阅笔记
+              <a href="/2017/02/19/AFNetworking图片加载理解/" rel="next" title="AFNetworking图片加载理解">
+                <i class="fa fa-chevron-left"></i> AFNetworking图片加载理解
               </a>
             
           </div>
@@ -402,8 +403,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/01/10/总结/" rel="prev" title="tips笔记总结">
-                tips笔记总结 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/10/12/生产者消费者模式/" rel="prev" title="生产者消费者模式">
+                生产者消费者模式 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -430,8 +431,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/11/08/AFNetworking流程总结/"
-           data-title="AFNetworking流程总结" data-url="http://yoursite.com/2016/11/08/AFNetworking流程总结/">
+      <div class="ds-thread" data-thread-key="2017/03/30/关于使用AFNetworking内存泄露的问题/"
+           data-title="AFNetworking内存泄露的问题" data-url="http://yoursite.com/2017/03/30/关于使用AFNetworking内存泄露的问题/">
       </div>
     
   </div>
@@ -517,7 +518,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AFNetworking流程总结"><span class="nav-number">1.</span> <span class="nav-text">AFNetworking流程总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-调用POST或GET方法-并把成功、失败方法块传入"><span class="nav-number">1.0.1.</span> <span class="nav-text">一.调用POST或GET方法,并把成功、失败方法块传入.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-调用dataTaskWithHTTPMethod方法返回NSURLSessionDataTask对象dataTask-下面是生成NSURLSessionDataTask对象的时候里面做的事情"><span class="nav-number">1.0.2.</span> <span class="nav-text">二.调用dataTaskWithHTTPMethod方法返回NSURLSessionDataTask对象dataTask(下面是生成NSURLSessionDataTask对象的时候里面做的事情)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-根据POST或GET方法、URL、参数生成NSMutableURLRequest对象request"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">(1).根据POST或GET方法、URL、参数生成NSMutableURLRequest对象request</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-根据-1-中生成的request对象并传入上传进度、下载进度方法块生成NSURLSessionDataTask对象并传入回调方法块-回调方法块里面根据返回的参数选择调用成功或失败方法块"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">(2).根据(1)中生成的request对象并传入上传进度、下载进度方法块生成NSURLSessionDataTask对象并传入回调方法块(回调方法块里面根据返回的参数选择调用成功或失败方法块)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-调用dataTask对象的方法resume发送网络请求"><span class="nav-number">1.0.3.</span> <span class="nav-text">三.调用dataTask对象的方法resume发送网络请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-然后从网络请求委托回调返回数据转发给AFURLSessionManagerTaskDelegate委托中的对应的方法"><span class="nav-number">1.0.4.</span> <span class="nav-text">四.然后从网络请求委托回调返回数据转发给AFURLSessionManagerTaskDelegate委托中的对应的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五-解析数据，然后从AFURLSessionManagerTaskDelegate中取出completionHandler方法块回调-解析数据是在另外开一个进程里面解析的"><span class="nav-number">1.0.5.</span> <span class="nav-text">五.解析数据，然后从AFURLSessionManagerTaskDelegate中取出completionHandler方法块回调(解析数据是在另外开一个进程里面解析的)</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#关于使用AFNetworking内存泄露的问题"><span class="nav-number">1.</span> <span class="nav-text">关于使用AFNetworking内存泄露的问题</span></a></li></ol></div>
             
 
           </div>

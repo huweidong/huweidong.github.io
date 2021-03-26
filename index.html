@@ -398,6 +398,312 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/12/生产者消费者模式/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="echo.hu">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/uploads/headImage.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="echo.hu">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="echo.hu" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/10/12/生产者消费者模式/" itemprop="url">
+                  生产者消费者模式
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-12T10:22:22+08:00">
+                2017-10-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/12/生产者消费者模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/10/12/生产者消费者模式/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/10/12/生产者消费者模式/" class="leancloud_visitors" data-flag-title="生产者消费者模式">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="生产者消费者模式"><a href="#生产者消费者模式" class="headerlink" title="生产者消费者模式"></a>生产者消费者模式</h1><p>解决的问题：避免两个线程其中一个线程处理过快等待另外一个线程造成资源的浪费。</p>
+<p>举个🌰</p>
+<p>比如对图片的处理改变其冷暖色调时，往往用户可能需要进行多次频繁的参数调整，假如设置一次参数渲染图片的时间为1秒(当然肯定不会那么长时间，这是个🌰，这是个🌰)，当用户拖动进度条从0拖到10时，处理的次数肯定超过十次，如果此时都在主线程处理，则处理时间肯定会超过十秒，这个很明显是不现实的，所以这个时候就需要生产者消费者模式了。</p>
+<p><strong>主线程</strong>作为-&gt;<strong>生产者</strong>：主要负责生产任务，即收集任务，比如上例中的渲染一次图片的任务。每次接收到任务时都把上一次的任务清空，直接处理最新数据，抛弃旧数据，让用户可以直接看到最新的处理结果。</p>
+<p><strong>异步全局线程</strong>作为-&gt;<strong>消费者</strong>：主要负责处理任务。消费者里面会有一个无限循环用于处理生产者生产的任务。</p>
+<h3 id="主要过程"><a href="#主要过程" class="headerlink" title="主要过程"></a>主要过程</h3><p>主要的过程包括如下</p>
+<p>1.初始化时全局异步线程处理代码块进入等待</p>
+<p>2.主线程run，push代码块进入数组</p>
+<p>3.激活全局异步线程对代码块进行处理</p>
+<p>4.执行完pop出代码块，继续进入等待</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/30/关于使用AFNetworking内存泄露的问题/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="echo.hu">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/uploads/headImage.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="echo.hu">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="echo.hu" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/30/关于使用AFNetworking内存泄露的问题/" itemprop="url">
+                  AFNetworking内存泄露的问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-30T11:06:22+08:00">
+                2017-03-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/30/关于使用AFNetworking内存泄露的问题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/30/关于使用AFNetworking内存泄露的问题/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/03/30/关于使用AFNetworking内存泄露的问题/" class="leancloud_visitors" data-flag-title="AFNetworking内存泄露的问题">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="关于使用AFNetworking内存泄露的问题"><a href="#关于使用AFNetworking内存泄露的问题" class="headerlink" title="关于使用AFNetworking内存泄露的问题"></a>关于使用AFNetworking内存泄露的问题</h1><p>这几天做完项目于是用instruments里面的Leaks检查了下内存情况,结果发现了一些AF里面的坑，AF Issues上面也有<a href="https://github.com/AFNetworking/AFNetworking/issues/3293" target="_blank" rel="external">哥们</a>提出问题来，不过也并没有解释清楚，所以特意自己重新看了遍源码整理了下.</p>
+<p>下面是我报内存泄露的部分代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">- (instancetype)init</div><div class="line">&#123;</div><div class="line">    self = [super init];</div><div class="line">    if (self) &#123;</div><div class="line">        self.manager=[AFHTTPSessionManager manager];</div><div class="line">        self.manager.requestSerializer=[AFJSONRequestSerializer serializer];</div><div class="line">        self.manager.requestSerializer.timeoutInterval=30;</div><div class="line">        self.manager.responseSerializer=[AFJSONResponseSerializer serializer];</div><div class="line">        self.manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@&quot;application/json&quot;];</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里的manager方法并不是单例方法，也就是说一个manager对象会对应一个或多个NSURLSession对象，这样创建会造成内存增长，但是这样应该并不会造成内存泄露才对，况且我在dealloc方法里面已经把manager置空，于是我查找苹果官方文档，找到如下信息</p>
+<p>Important</p>
+<p>The session object keeps a strong reference to the delegate until your app exits or explicitly invalidates the session. If you do not invalidate the session, your app leaks memory until it exits.</p>
+<p>大意如下：</p>
+<p>会话对象保持对代理的强烈引用，直到您的应用程序退出或显式使会话无效。 如果您不使会话无效，您的应用程序会在内存溢出之前泄漏内存。</p>
+<p>然后我在AF的源码里面的initWithSessionConfiguration方法找到如下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">@property (readwrite, nonatomic, strong) NSURLSession *session;</div><div class="line"></div><div class="line">self.session = [NSURLSession sessionWithConfiguration:self.sessionConfiguration delegate:self delegateQueue:self.operationQueue];</div></pre></td></tr></table></figure>
+<p>那么答案就出来了session被AFNetworkReachabilityManager对象强引用了，session的委托又强持有了AFNetworkReachabilityManager对象，所以导致AFNetworkReachabilityManager对象置空后session依然存在，从而导致内存泄漏了</p>
+<p>所以，正确的用法应该在AF上面再封装多一层把manager写成单例，降低内存峰值，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">+ (AFHTTPSessionManager *)sharedManager &#123;</div><div class="line">    static dispatch_once_t onceToken;</div><div class="line">    dispatch_once(&amp;onceToken, ^&#123;</div><div class="line">        manager=[AFHTTPSessionManager manager];</div><div class="line">        manager.requestSerializer=[AFJSONRequestSerializer serializer];</div><div class="line">        manager.requestSerializer.timeoutInterval=30;</div><div class="line">        manager.responseSerializer=[AFJSONResponseSerializer serializer];</div><div class="line">        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@&quot;application/json&quot;];</div><div class="line">    &#125;);</div><div class="line">    return manager;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用则直接[封装类名 sharedManager] POST如此使用即可.</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/19/AFNetworking图片加载理解/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1443,7 +1749,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
